@@ -29,12 +29,12 @@ int main (int argc, char** argv) {
 		while (myfile.good()) {
 		    getline (myfile, line);
 		    //cout << line << endl;
-		    if (NoNList.count(line) >= 1) {
-			  NoNList[line]++;
+		    if (NoNList.count(line) >= 1) {     //If there are > 1 names
+			  NoNList[line]++;           	   //Increment
 		    }
 		    else {
 			  NoNList.insert(pair<string, int>(line, 1));
-			  cout << line <<endl;
+			  cout << line << endl;
 		    }
 		}
 	  }
