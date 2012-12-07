@@ -12,7 +12,6 @@ using std::string;
 using std::ifstream;
 using std::ofstream;
 
-//int main (int argc, char** argv) {
 int main () {
     string line;
     ifstream myfile ("tweets");
@@ -27,7 +26,6 @@ int main () {
 		}
 		else {
 		    tweets.insert(pair<string, int>(line, 1));
-		    //cout << line << endl;
 		}
 	  }
     }
@@ -36,8 +34,8 @@ int main () {
     ofstream myNewFile;
     myNewFile.open ("uniqueWords.txt");
     for (it = tweets.begin(); it != tweets.end(); it++) {
-	  if (it->second <= 2500) {
-		cout << it->first << "appeared " << it->second << " times" << endl;
+	  if (it->second <= 5000) {
+		myNewFile << it->first << " appeared " << it->second << " times" << endl;
 	  }
     }
     myNewFile.close();
