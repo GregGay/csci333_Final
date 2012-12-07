@@ -12,9 +12,9 @@ using std::string;
 using std::ifstream;
 
 int main (int argc, char** argv) {
-    map <string, int> NoNList;
     string line;
     ifstream myfile(argv[1]);
+    map <string, int> NoNList;
     map<string, int>::iterator it;
 
     if (argc != 3) {
@@ -36,22 +36,24 @@ int main (int argc, char** argv) {
 	  myfile.close();
     
 	  //If the people who appear in the list >= threshold, they are NICE
-	  cout << "NICE PEPS" << endl;
+	  cout << "NICE PEPS LIST" << endl;
+	  cout << endl;
 	  for (it = NoNList.begin(); it != NoNList.end(); it++) {
 		if (it->second >= atoi(argv[2])) {
-		    //cout << it->first << endl;
 		    cout << it->first << " appeared: " << it->second << " times" << endl;
 		}
 	  }
 
 	  //If the people who appear in the list < threshold, they are NAUGHTY
 	  cout << endl;
-	  cout << "NAUGHTY PEPS" << endl;
+	  cout << "NAUGHTY PEPS LIST" << endl;
+	  cout << endl;
 	  for (it = NoNList.begin(); it != NoNList.end(); it++) {
 		if (it->second < atoi(argv[2])) {
 		    cout << it->first << " appeared: " << it->second << " times" << endl;
 		}
 	  }
     }
+    
     return 0;
 }
