@@ -15,32 +15,43 @@ int main (int argc, char** argv) {
     map <string, int> NoNList;
     string line;
     ifstream myfile(argv[1]);
-    
+    map<string, int>::iterator it;
+
     if (argc != 3) {
 	  cout << "Usage list [filename] [threshold]" << endl;
     }
     
     else {
-	  cout << "filename: " << argv[1] << endl;
-	  cout << "threshold: " << argv[2] << endl;
-	  //cout << atoi(argv[1]) + atoi(argv[2]) << endl;
-	  
 	  if (myfile.is_open()) {
 		while (myfile.good()) {
 		    getline (myfile, line);
-		    //cout << line << endl;
 		    if (NoNList.count(line) >= 1) {     //If there are > 1 names
 			  NoNList[line]++;           	   //Increment
 		    }
 		    else {
 			  NoNList.insert(pair<string, int>(line, 1));
-			  cout << line << endl;
 		    }
 		}
 	  }
 	  myfile.close();
-	  
-    }
+    
+	  //If the people who appear in the list >= threshold, they are NICE
+	  cout << "NICE PEPS" << endl;
+	  for (it = NoNList.begin(); it != NoNList.end(); it++) {
+		if (it->second >= atoi(argv[2])) {
+		    //cout << it->first << endl;
+		    cout << it->first << " appeared: " << it->second << " times" << endl;
+		}
+	  }
 
+	  //If the people who appear in the list < threshold, they are NAUGHTY
+	  cout << endl;
+	  cout << "NAUGHTY PEPS" << endl;
+	  for (it = NoNList.begin(); it != NoNList.end(); it++) {
+		if (it->second < atoi(argv[2])) {
+		    cout << it->first << " appeared: " << it->second << " times" << endl;
+		}
+	  }
+    }
     return 0;
 }
