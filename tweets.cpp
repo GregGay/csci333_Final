@@ -17,7 +17,8 @@ int main () {
     ifstream myfile ("tweets");
     map <string, int> tweets;
     map<string, int>::iterator it;
-
+    int total = 0;
+    
     if (myfile.is_open()) {
 	  while (myfile.good()) {
 		getline (myfile, line, ' ');
@@ -34,11 +35,21 @@ int main () {
     ofstream myNewFile;
     myNewFile.open ("uniqueWords.txt");
     for (it = tweets.begin(); it != tweets.end(); it++) {
-	  if (it->second <= 5000) {
-		myNewFile << it->first << " appeared " << it->second << " times" << endl;
-	  }
+	  myNewFile << it->first << " appeared " << it->second << " times" << endl;
     }
     myNewFile.close();
+
+
+    for (it = tweets.begin(); it != tweets.end(); it++) {
+	  total+=it->second;
+    }
+
+    ofstream myNewerFile;
+    myNewerFile.open ("lexFile.txt");
+    myNewerFile << "Total words: " << total << endl;
+    myNewerFile << "Unique Words: " << tweets.size() << endl;
+    myNewerFile << "Lexical diversity: " << total/tweets.size() << endl;
+    myNewerFile.close();
 
     return 0;
 }
