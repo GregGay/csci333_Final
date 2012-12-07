@@ -12,8 +12,7 @@ using std::string;
 using std::ifstream;
 
 int main (int argc, char** argv) {
-    //ofstream myFile;
-    map <string, int> dictionary;
+    map <string, int> NoNList;
     string line;
     ifstream myfile(argv[1]);
     
@@ -29,7 +28,14 @@ int main (int argc, char** argv) {
 	  if (myfile.is_open()) {
 		while (myfile.good()) {
 		    getline (myfile, line);
-		    cout << line << endl;
+		    //cout << line << endl;
+		    if (NoNList.count(line) >= 1) {
+			  NoNList[line]++;
+		    }
+		    else {
+			  NoNList.insert(pair<string, int>(line, 1));
+			  cout << line <<endl;
+		    }
 		}
 	  }
 	  myfile.close();
