@@ -10,29 +10,37 @@ using std::cout;
 using std::endl;
 using std::string;
 using std::ifstream;
+using std::ofstream;
 
 //int main (int argc, char** argv) {
 int main () {
     string line;
     ifstream myfile ("tweets");
-    map <int, string> dictionary;
-    /*
-    string str="ho t p";
-    for (size_t n = 0; n < str.size(); n++) {
-    size_t pos;
-    pos = str.find(" ");
-    string str3 = str.substr(pos);
-    cout << str3 << endl;
-    cout<<endl;
-    }*/
+    map <string, int> tweets;
+    map<string, int>::iterator it;
+
     if (myfile.is_open()) {
 	  while (myfile.good()) {
 		getline (myfile, line, ' ');
-		cout << line << endl;
+		if (tweets.count(line) >= 1) {
+		    tweets[line]++;
+		}
+		else {
+		    tweets.insert(pair<string, int>(line, 1));
+		    //cout << line << endl;
+		}
 	  }
-	  myfile.close();
     }
+    myfile.close();
 
-    else cout << "Unable to open file." << endl;
+    ofstream myNewFile;
+    myNewFile.open ("uniqueWords.txt");
+    for (it = tweets.begin(); it != tweets.end(); it++) {
+	  if (it->second <= 2500) {
+		cout << it->first << "appeared " << it->second << " times" << endl;
+	  }
+    }
+    myNewFile.close();
+
     return 0;
 }
