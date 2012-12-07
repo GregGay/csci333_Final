@@ -17,8 +17,9 @@ int main () {
     ifstream myfile ("tweets");
     map <string, int> tweets;
     map<string, int>::iterator it;
-    int total = 0;
-    
+    double total = 0.0;
+    double lex = 0.0;
+
     if (myfile.is_open()) {
 	  while (myfile.good()) {
 		getline (myfile, line, ' ');
@@ -48,7 +49,8 @@ int main () {
     myNewerFile.open ("lexFile.txt");
     myNewerFile << "Total words: " << total << endl;
     myNewerFile << "Unique Words: " << tweets.size() << endl;
-    myNewerFile << "Lexical diversity: " << total/tweets.size() << endl;
+    lex = total/tweets.size();
+    myNewerFile << "Lexical diversity: " << lex << endl;
     myNewerFile.close();
 
     return 0;
